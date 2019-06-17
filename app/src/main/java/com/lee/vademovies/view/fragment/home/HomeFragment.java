@@ -169,7 +169,10 @@ public class HomeFragment extends BaseFragment {
         @Override
         public void onSuccess(Result<HotBean> data, Object... args) {
             if (data.getStatus().equals("0000")) {
-                LogUtils.d(data.getResult().getResult().toString());
+                LogUtils.d("------------------");
+                LogUtils.d(data.getResult().toString());
+                LogUtils.d("------------------");
+
                 HotRecyclerViewAdapter hotRecyclerViewAdapter = new HotRecyclerViewAdapter(getActivity(), data.getResult());
                 mRv1Home.setAdapter(hotRecyclerViewAdapter);
             }
