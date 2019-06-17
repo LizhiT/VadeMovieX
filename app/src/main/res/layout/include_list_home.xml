@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginBottom="20dp"
+    android:background="@color/colorPrimary">
+
+
+    <TextView
+        android:id="@+id/txt_rmdy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="热门电影"
+        android:textColor="@color/colorGrey"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/txt_view"
+        android:layout_width="33dp"
+        android:layout_height="3dp"
+        android:layout_below="@id/txt_rmdy"
+        android:layout_marginTop="3dp"
+        android:background="@color/colorLine" />
+
+    <ImageView
+        android:id="@+id/image_more1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/right_icon" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy_Cinemax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_view"
+        android:layout_marginTop="20dp" />
+</RelativeLayout>

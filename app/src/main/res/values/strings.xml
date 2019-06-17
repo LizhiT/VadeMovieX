@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">韦德影院</string>
+    <string name="welcome_text">一场不一样的视觉盛宴</string>
+    <string name="guide_text1_1">一场电影</string>
+    <string name="guide_text3_2">荡漾你的心灵</string>
+    <string name="guide_text1_2">净化你的灵魂</string>
+    <string name="guide_text2_2">看遍人生百态</string>
+    <string name="guide_text4_1">八维移动通信学院作品</string>
+    <string name="guide_text4_2">带您开启一段美好的电影之旅</string>
+
+    <string name="net_no">正在连接网络请稍等........</string>
+
+    <string name="toast_gps_not_found">当前定位不可用,请检查是否打开GPS或网络</string>
+
+    <string name="login_phone">手机号</string>
+    <string name="login_psd">登录密码</string>
+    <string name="login_rem_psd">记住密码</string>
+    <string name="login_fast_resign">快速注册</string>
+    <string name="login_login">登录</string>
+    <string name="login_others">第三方账号快速登录</string>
+
+    <string name="resign_name">昵称</string>
+    <string name="resign_sex">性别</string>
+    <string name="resign_birthday">出生日期</string>
+    <string name="resign_phone">手机号</string>
+    <string name="resign_email">邮箱</string>
+    <string name="resign_pws">登录密码</string>
+    <string name="resign_btn">注册</string>
+
+    <string name="location_home">定位中....</string>
+    <string name="search_hint_home">输入要搜索的影片</string>
+    <string name="search_bt_home">搜索</string>
+    <string name="search_toast">搜索中...</string>
+
+    <string name="home_hot_movie">热门电影</string>
+    <string name="home_relese_movie">正在上映</string>
+    <string name="home_will_movie">即将上映</string>
+
+
+
+
+
+</resources>

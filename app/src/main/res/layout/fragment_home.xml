@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="186dp"
+            android:background="@drawable/cinema_details" />
+
+        <recycler.coverflow.RecyclerCoverFlow
+            android:id="@+id/rcf_home"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginRight="24dp" />
+
+        <TextView
+            android:id="@+id/movie_text_xian"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/rcf_home"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp" />
+
+        <TextView
+            android:id="@+id/movie_text_dong"
+            android:layout_width="35dp"
+            android:layout_height="2dp"
+            android:layout_below="@id/rcf_home"
+            android:layout_centerHorizontal="false"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/moviefragment_shu" />
+
+        <!--<View-->
+        <!--android:id="@+id/line_home"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="3dp"-->
+        <!--android:layout_below="@id/rcf_home"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:layout_marginRight="24dp" />-->
+
+        <RelativeLayout
+            android:id="@+id/rl_list1_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movie_text_dong"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_hot_movie_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_hot_movie"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="33dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/tv_hot_movie_home"
+                android:layout_marginTop="3dp"
+                android:background="@color/colorLine" />
+
+            <ImageView
+                android:id="@+id/iv_more1_home"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/right_icon" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv1_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_hot_movie_home"
+                android:layout_marginTop="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_list2_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_list1_home"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_release_movie_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_relese_movie"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="33dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/tv_release_movie_home"
+                android:layout_marginTop="3dp"
+                android:background="@color/colorLine" />
+
+            <ImageView
+                android:id="@+id/iv_more2_home"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/right_icon" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv2_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_release_movie_home"
+                android:layout_marginTop="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_list3_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_list2_home"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_will_movie_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_will_movie"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="33dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/tv_will_movie_home"
+                android:layout_marginTop="3dp"
+                android:background="@color/colorLine" />
+
+            <ImageView
+                android:id="@+id/iv_more3_home"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/right_icon" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv3_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_will_movie_home"
+                android:layout_marginTop="20dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
