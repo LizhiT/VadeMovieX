@@ -25,22 +25,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.activity.MessageActivity"></activity>
+        <activity android:name=".view.activity.FeedBackActivity"></activity>
+        <activity android:name=".view.activity.TicketHistoryActivity" />
+        <activity android:name=".view.activity.AttentionActivity" />
+        <activity android:name=".view.activity.UserInfoActivity" />
+        <activity android:name=".view.activity.MessageActivity" />
         <activity android:name=".view.activity.ResignActivity" />
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.GuiDePageActivity" />
         <activity
             android:name=".util.permisstion.PermissionActivity"
             android:theme="@style/Translucent" />
-        <activity android:name=".view.activity.WelcomeActivity">
-
+        <activity android:name=".view.activity.WelcomeActivity" />
+        <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MainActivity"></activity>
     </application>
 
 </manifest>

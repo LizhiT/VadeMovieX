@@ -1,8 +1,14 @@
 package com.lee.vademovies.httputil;
 
+import com.lee.vademovies.bean.HotBean;
+import com.lee.vademovies.bean.HotWillBean;
+import com.lee.vademovies.bean.HotingBean;
 import com.lee.vademovies.bean.LoginBean;
+import com.lee.vademovies.bean.MovieDetail;
 import com.lee.vademovies.bean.Result;
 import com.lee.vademovies.bean.UserInfo;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -47,17 +53,22 @@ public interface ApiService {
 
     //查询热门电影信息
     @GET("movie/v1/findHotMovieList")
-    Observable<Result> getHomeData(@Query("page") int page,
-                                   @Query("count") int count);
+    Observable<Result<List<HotBean.ResultBean>>> getHomeData(@Query("page") int page,
+                                                             @Query("count") int count);
 
     //查询热门电影信息
     @GET("movie/v1/findReleaseMovieList")
-    Observable<Result> getHomeHotingData(@Query("page") int page,
-                                         @Query("count") int count);
+    Observable<Result<List<HotingBean.ResultBean>>> getHomeHotingData(@Query("page") int page,
+                                                                      @Query("count") int count);
 
     //查询热门电影信息
     @GET("movie/v1/findComingSoonMovieList")
-    Observable<Result> getHomeWillData(@Query("page") int page,
-                                       @Query("count") int count);
+    Observable<Result<List<HotWillBean.ResultBean>>> getHomeWillData(@Query("page") int page,
+                                                                     @Query("count") int count);
+
+    //查看电影详情
+    @GET("movie/v1/findMoviesDetail")
+    Observable<Result<List<MovieDetail.ResultBean>>> getMovieDetail(@Query("movieId") int movieId);
+
 
 }

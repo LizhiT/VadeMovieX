@@ -1,7 +1,27 @@
 package com.lee.vademovies.view.fragment.home;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.lee.vademovies.R;
 import com.lee.vademovies.base.BaseFragment;
+import com.lee.vademovies.view.activity.AttentionActivity;
+import com.lee.vademovies.view.activity.FeedBackActivity;
+import com.lee.vademovies.view.activity.MessageActivity;
+import com.lee.vademovies.view.activity.TicketHistoryActivity;
+import com.lee.vademovies.view.activity.UserInfoActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created :  LiZhIX
@@ -10,6 +30,44 @@ import com.lee.vademovies.base.BaseFragment;
  */
 public class MineFragment extends BaseFragment {
 
+
+    @BindView(R.id.iv_remind_home)
+    ImageView mIvRemindHome;
+    @BindView(R.id.icon_head)
+    ImageView mIconHead;
+    @BindView(R.id.mine_text)
+    TextView mMineText;
+    @BindView(R.id.sign)
+    Button mSign;
+    @BindView(R.id.rl_info_mine)
+    RelativeLayout mRlInfoMine;
+    @BindView(R.id.rl_attention_mine)
+    RelativeLayout mRlAttentionMine;
+    @BindView(R.id.rl_ticket_mine)
+    RelativeLayout mRlTicketMine;
+    @BindView(R.id.rl_feedback_mine)
+    RelativeLayout mRlFeedbackMine;
+    @BindView(R.id.rl_version_mine)
+    RelativeLayout mRlVersionMine;
+    @BindView(R.id.rl_exit_mine)
+    RelativeLayout mRlExitMine;
+    private View view;
+    private Unbinder unbinder;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = View.inflate(getActivity(), R.layout.fragment_mine, null);
+        initView();
+        unbinder = ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -25,11 +83,11 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
         super.onFragmentVisibleChange(isVisible);
-        if(isVisible){
+        if (isVisible) {
             //更新界面数据，如果数据还在下载中，就显示加载框
 
 
-        }else{
+        } else {
             //关闭加载框
             mLoadDialog.cancel();
         }
@@ -40,4 +98,38 @@ public class MineFragment extends BaseFragment {
         super.onFragmentFirstVisible();
 
     }
+
+
+    @OnClick({R.id.iv_remind_home, R.id.sign, R.id.rl_info_mine, R.id.rl_attention_mine, R.id.rl_ticket_mine, R.id.rl_feedback_mine, R.id.rl_version_mine, R.id.rl_exit_mine})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.iv_remind_home:
+                intent(MessageActivity.class);
+                break;
+            case R.id.sign:
+                break;
+            case R.id.rl_info_mine:
+                intent(UserInfoActivity.class);
+                break;
+            case R.id.rl_attention_mine:
+                intent(AttentionActivity.class);
+                break;
+            case R.id.rl_ticket_mine:
+                intent(TicketHistoryActivity.class);
+                break;
+            case R.id.rl_feedback_mine:
+                intent(FeedBackActivity.class);
+                break;
+            //TODO  判断版本 如果不符 提示更新
+            case R.id.rl_version_mine:
+
+                break;
+            //TODO 退出登录
+            case R.id.rl_exit_mine:
+                break;
+        }
+    }
+
 }

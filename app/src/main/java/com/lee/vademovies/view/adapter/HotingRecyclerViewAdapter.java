@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lee.vademovies.R;
-import com.lee.vademovies.bean.HotBean;
+import com.lee.vademovies.bean.HotingBean;
 import com.lee.vademovies.bean.Result;
 import com.lee.vademovies.util.ImageLoaderManager;
 
@@ -17,31 +17,30 @@ import java.util.List;
 
 /**
  * Created :  LiZhIX
- * Date :  2019/6/17 18:58
+ * Date :  2019/6/18 11:39
  * Description  :
  */
-public class HotRecyclerViewAdapter extends RecyclerView.Adapter<HotRecyclerViewAdapter.ViewHolder> {
+public class HotingRecyclerViewAdapter extends RecyclerView.Adapter<HotingRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private Result<List<HotBean.ResultBean>> mHotBean;
+    private Result<List<HotingBean.ResultBean>> mHotBean;
 
-    public HotRecyclerViewAdapter(Context context, Result<List<HotBean.ResultBean>> hotBean) {
+    public HotingRecyclerViewAdapter(Context context, Result<List<HotingBean.ResultBean>> hotBean) {
         this.context = context;
         mHotBean = hotBean;
     }
 
     @NonNull
     @Override
-    public HotRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HotingRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = View.inflate(context, R.layout.include_recycler_item, null);
-        HotRecyclerViewAdapter.ViewHolder holder = new HotRecyclerViewAdapter.ViewHolder(view);
+        HotingRecyclerViewAdapter.ViewHolder holder = new HotingRecyclerViewAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HotRecyclerViewAdapter.ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull HotingRecyclerViewAdapter.ViewHolder holder, int i) {
         holder.txtName.setText(mHotBean.getResult().get(i).getName());
-        ImageLoaderManager.loadRoundImage(context, mHotBean.getResult().get(i).getImageUrl(), holder.sdvImage, 12)
-        ;
+        ImageLoaderManager.loadRoundImage(context, mHotBean.getResult().get(i).getImageUrl(), holder.sdvImage, 12);
     }
 
     @Override

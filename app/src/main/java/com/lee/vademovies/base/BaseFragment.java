@@ -3,6 +3,7 @@ package com.lee.vademovies.base;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,6 +48,12 @@ public abstract class BaseFragment extends Fragment {
     public Dialog mLoadDialog;// 加载框
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initVariable();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        UserInfoDao userInfoDao = DaoMaster.newDevSession(getActivity(), UserInfoDao.TABLENAME).getUserInfoDao();
@@ -60,6 +67,37 @@ public abstract class BaseFragment extends Fragment {
         initView();
         LogUtils.e(this.toString() + "页面加载使用：" + (System.currentTimeMillis() - time));
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        //如果setUserVisibleHint()在rootView创建前调用时，那么
+        //就等到rootView创建完后才回调onFragmentVisibleChange(true)
+        //保证onFragmentVisibleChange()的回调发生在rootView创建完成之后，以便支持ui操作
+        if (rootView == null) {
+            rootView = view;
+            if (getUserVisibleHint()) {
+                if (isFirstVisible) {
+                    onFragmentFirstVisible();
+                    isFirstVisible = false;
+                }
+                onFragmentVisibleChange(true);
+                isFragmentVisible = true;
+            }
+        }
+        super.onViewCreated(isReuseView && rootView != null ? rootView : view, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        initVariable();
     }
 
 
@@ -101,41 +139,22 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initVariable();
+    /**
+     * @param mActivity 传送Activity的
+     */
+    public void intent(Class mActivity) {
+        Intent intent = new Intent(getActivity(), mActivity);
+        startActivity(intent);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        //如果setUserVisibleHint()在rootView创建前调用时，那么
-        //就等到rootView创建完后才回调onFragmentVisibleChange(true)
-        //保证onFragmentVisibleChange()的回调发生在rootView创建完成之后，以便支持ui操作
-        if (rootView == null) {
-            rootView = view;
-            if (getUserVisibleHint()) {
-                if (isFirstVisible) {
-                    onFragmentFirstVisible();
-                    isFirstVisible = false;
-                }
-                onFragmentVisibleChange(true);
-                isFragmentVisible = true;
-            }
-        }
-        super.onViewCreated(isReuseView && rootView != null ? rootView : view, savedInstanceState);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        initVariable();
+    /**
+     * @param mActivity 传送Activity的
+     * @param bundle
+     */
+    public void intent(Class mActivity, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), mActivity);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void initVariable() {
