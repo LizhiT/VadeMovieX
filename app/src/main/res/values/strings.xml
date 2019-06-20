@@ -40,7 +40,6 @@
     <string name="studio_near_movie">附近影院</string>
     <string name="studio_recommended_movie">推荐影院</string>
 
-
     <string name="mine_sign_in">签到</string>
     <string name="mine_info">我的信息</string>
     <string name="mine_attention">我的关注</string>
@@ -49,6 +48,16 @@
     <string name="mine_version">最新版本</string>
     <string name="mine_exit_out">退出登录</string>
     <string name="mine_messages">©八维移动通信学院毕业作品</string>
+
+    <string name="info_mine">我的信息</string>
+    <string name="info_mine_icon">用户头像</string>
+    <string name="info_mine_name">用户昵称</string>
+    <string name="info_mine_sex">用户性别</string>
+    <string name="info_mine_birthday">出生日期</string>
+    <string name="info_mine_tel">手机号</string>
+    <string name="info_mine_email">邮箱</string>
+    <string name="info_mine_reset_pws">重置密码</string>
+    <string name="info_mine_reset_info">修改信息</string>
 
 
 </resources>

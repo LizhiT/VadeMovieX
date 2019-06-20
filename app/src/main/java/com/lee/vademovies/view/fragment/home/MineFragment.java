@@ -1,7 +1,10 @@
 package com.lee.vademovies.view.fragment.home;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +15,12 @@ import android.widget.TextView;
 
 import com.lee.vademovies.R;
 import com.lee.vademovies.base.BaseFragment;
-import com.lee.vademovies.view.activity.AttentionActivity;
-import com.lee.vademovies.view.activity.FeedBackActivity;
+import com.lee.vademovies.view.activity.mine.AttentionActivity;
+import com.lee.vademovies.view.activity.mine.FeedBackActivity;
+import com.lee.vademovies.view.activity.LoginActivity;
 import com.lee.vademovies.view.activity.MessageActivity;
-import com.lee.vademovies.view.activity.TicketHistoryActivity;
-import com.lee.vademovies.view.activity.UserInfoActivity;
+import com.lee.vademovies.view.activity.mine.TicketHistoryActivity;
+import com.lee.vademovies.view.activity.mine.UserInfoActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,6 +132,20 @@ public class MineFragment extends BaseFragment {
                 break;
             //TODO 退出登录
             case R.id.rl_exit_mine:
+                // 退出登录 通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                //    设置Title的内容
+                builder.setTitle("温馨提示");
+                builder.setMessage("确定退出登录吗？");
+                builder.setPositiveButton("确认退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("暂不退出", null);
+                builder.show();
                 break;
         }
     }

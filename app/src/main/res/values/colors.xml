@@ -6,6 +6,7 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#333333</color>
+    <color name="colorGrey2">#999999</color>
 
     <color name="colorWhiteA1">#22FFFFFF</color>
     <color name="colorWhiteA2">#AAFFFFFF</color>

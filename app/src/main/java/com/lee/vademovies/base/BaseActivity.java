@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //查询登录用户，方便每个页面使用
         UserInfoDao userInfoDao = DaoMaster.newDevSession(this, UserInfoDao.TABLENAME).getUserInfoDao();
-        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
+        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Ttt.eq(1)).list();
         if (userInfos != null && userInfos.size() > 0) {
             LOGIN_USER = userInfos.get(0);//读取第一项
         }

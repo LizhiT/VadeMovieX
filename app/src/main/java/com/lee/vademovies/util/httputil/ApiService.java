@@ -1,4 +1,4 @@
-package com.lee.vademovies.httputil;
+package com.lee.vademovies.util.httputil;
 
 import com.lee.vademovies.bean.HotBean;
 import com.lee.vademovies.bean.HotWillBean;

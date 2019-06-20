@@ -1,8 +1,8 @@
 package com.lee.vademovies.presenter;
 
 import com.lee.vademovies.base.BasePresenter;
-import com.lee.vademovies.httputil.ApiService;
-import com.lee.vademovies.httputil.NetWorkMangager;
+import com.lee.vademovies.util.httputil.ApiService;
+import com.lee.vademovies.util.httputil.NetWorkMangager;
 import com.lee.vademovies.model.DataCall;
 
 import io.reactivex.Observable;

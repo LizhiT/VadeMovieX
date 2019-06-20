@@ -13,45 +13,56 @@ import org.greenrobot.greendao.annotation.Id;
 @Entity
 public class UserInfo {
     @Id
-    long userId;
-    String headPic;
-    String nickName;
-    String phone;
-    String sessionId;
-    int sex;
+    private Long id;
+    private long birthday;
+    private long lastLoginTime;
+    private String nickName;
+    private String phone;
+    private String sex;
+    private String headPic;
+    private String sessionId;
+    private int ttt = 0;
 
-    int status;//记录本地用户登录状态，用于直接登录和退出,1:登录，0：未登录或退出
-
-    @Generated(hash = 836882664)
-    public UserInfo(long userId, String headPic, String nickName, String phone,
-                    String sessionId, int sex, int status) {
-        this.userId = userId;
-        this.headPic = headPic;
+    @Generated(hash = 1367569174)
+    public UserInfo(Long id, long birthday, long lastLoginTime, String nickName,
+                    String phone, String sex, String headPic, String sessionId, int ttt) {
+        this.id = id;
+        this.birthday = birthday;
+        this.lastLoginTime = lastLoginTime;
         this.nickName = nickName;
         this.phone = phone;
-        this.sessionId = sessionId;
         this.sex = sex;
-        this.status = status;
+        this.headPic = headPic;
+        this.sessionId = sessionId;
+        this.ttt = ttt;
     }
 
-    @Generated(hash = 1279772520)
+    @Generated(hash = 1818808915)
     public UserInfo() {
     }
 
-    public long getUserId() {
-        return this.userId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getHeadPic() {
-        return this.headPic;
+    public long getBirthday() {
+        return this.birthday;
     }
 
-    public void setHeadPic(String headPic) {
-        this.headPic = headPic;
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
+    }
+
+    public long getLastLoginTime() {
+        return this.lastLoginTime;
+    }
+
+    public void setLastLoginTime(long lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     public String getNickName() {
@@ -70,6 +81,22 @@ public class UserInfo {
         this.phone = phone;
     }
 
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getHeadPic() {
+        return this.headPic;
+    }
+
+    public void setHeadPic(String headPic) {
+        this.headPic = headPic;
+    }
+
     public String getSessionId() {
         return this.sessionId;
     }
@@ -78,19 +105,26 @@ public class UserInfo {
         this.sessionId = sessionId;
     }
 
-    public int getSex() {
-        return this.sex;
+    public int getTtt() {
+        return this.ttt;
     }
 
-    public void setSex(int sex) {
-        this.sex = sex;
+    public void setTtt(int ttt) {
+        this.ttt = ttt;
     }
 
-    public int getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "id=" + id +
+                ", birthday=" + birthday +
+                ", lastLoginTime=" + lastLoginTime +
+                ", nickName='" + nickName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", headPic='" + headPic + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                ", ttt=" + ttt +
+                '}';
     }
 }

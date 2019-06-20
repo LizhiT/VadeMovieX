@@ -1,6 +1,7 @@
 package com.lee.vademovies.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,16 +67,15 @@ public class LoginActivity extends BaseActivity {
     private String mPwd;
     private boolean pasVisibile = false;
     private Unbinder mUnbinder;
+    private SharedPreferences mShare;
 
 
-    //TODO  默认登录后直接登录
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUnbinder = ButterKnife.bind(this);
 
     }
-
 
     @Override
     protected int getLayoutId() {
@@ -85,6 +86,31 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
         EditTextUtils.setEditTextInhibitInputSpace(mEtPsdLogin);
         mLoginPresenter = new LoginPresenter(new LoginCall());
+        mShare = VadeApplication.getShare();
+
+        if (mShare.getBoolean("remPas", false)) {
+            //设置默认是记录密码状态
+            mCbRemPwdLogin.setChecked(true);
+            mEtPhoneLogin.setText(mShare.getString("mobile", ""));
+            mEtPsdLogin.setText(mShare.getString("pas", ""));
+            //设置默认是自动登录状态
+            mCbRemPwdLogin.setChecked(true);
+            //跳转界面
+            intent(MainActivity.class);
+        }
+
+        mCbRemPwdLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (mCbRemPwdLogin.isChecked()) {
+                    VadeApplication.getShare().edit().putBoolean("remPas", mCbRemPwdLogin.isChecked()).commit();
+                } else {
+                    VadeApplication.getShare().edit().putBoolean("remPas", mCbRemPwdLogin.isChecked()).commit();
+                }
+            }
+        });
+
+
     }
 
 
@@ -99,12 +125,11 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.iv_show_pwd_login, R.id.cb_rem_pwd_login, R.id.tv_fast_resign_login, R.id.bt_login_login, R.id.iv_wechat_login})
+    @OnClick({R.id.iv_show_pwd_login, R.id.tv_fast_resign_login, R.id.bt_login_login, R.id.iv_wechat_login})
     public void onClick(View v) {
 
         mPhoneNum = mEtPhoneLogin.getText().toString();
         mPwd = mEtPsdLogin.getText().toString();
-
 
         switch (v.getId()) {
             default:
@@ -120,10 +145,6 @@ public class LoginActivity extends BaseActivity {
                     mEtPsdLogin.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     pasVisibile = true;
                 }
-                break;
-            //记住密码
-            case R.id.cb_rem_pwd_login:
-                VadeApplication.getShare().edit().putBoolean("remPas", mCbRemPwdLogin.isChecked()).commit();
                 break;
             //快速注册
             case R.id.tv_fast_resign_login:
@@ -146,6 +167,7 @@ public class LoginActivity extends BaseActivity {
                 }
                 mLoadDialog.show();
                 mLoginPresenter.reqeust(mPhoneNum, EncryptUtil.encrypt(mPwd));
+
                 break;
             //微信登录
             //TODO 微信登陆(集成三方)
@@ -161,9 +183,10 @@ public class LoginActivity extends BaseActivity {
         public void onSuccess(Result<UserInfo> data, Object... args) {
             mLoadDialog.cancel();
             if (data.getStatus().equals("0000")) {
-                data.getResult().setStatus(1);//设置登录状态，保存到数据库
+                data.getResult().setTtt(1);//设置登录状态，保存到数据库
                 UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
                 userInfoDao.insertOrReplace(data.getResult());
+
                 intent(MainActivity.class);
                 finish();
             }
