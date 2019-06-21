@@ -3,11 +3,15 @@ package com.lee.vademovies.appllication;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.lee.vademovies.util.ScreenAdapter;
+import com.lee.vademovies.util.db.DaoMaster;
+import com.lee.vademovies.util.db.DaoSession;
+import com.lee.vademovies.util.db.UserInfoDao;
 
 /**
  * Created :  LiZhIX
@@ -40,6 +44,7 @@ public class VadeApplication extends Application {
     private static Context context;
 
     private static SharedPreferences sharedPreferences;
+    private UserInfoDao userDao;
 
     @Override
     public void onCreate() {
@@ -56,6 +61,15 @@ public class VadeApplication extends Application {
 
         //设置log打印开关
         LogUtils.getConfig().setLogSwitch(true);
+
+        /**初始化数据库*/
+        DaoMaster.DevOpenHelper mHelper = new DaoMaster.
+                DevOpenHelper(this, "user-db", null);
+
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        DaoMaster master = new DaoMaster(db);
+        DaoSession daoSession = master.newSession();
+        userDao = daoSession.getUserInfoDao();
 
     }
 

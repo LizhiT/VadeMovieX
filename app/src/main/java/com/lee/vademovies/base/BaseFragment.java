@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.lee.vademovies.appllication.VadeApplication;
-import com.lee.vademovies.bean.UserInfo;
+import com.lee.vademovies.model.bean.UserInfo;
+import com.lee.vademovies.util.db.DaoMaster;
+import com.lee.vademovies.util.db.UserInfoDao;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -56,10 +60,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        UserInfoDao userInfoDao = DaoMaster.newDevSession(getActivity(), UserInfoDao.TABLENAME).getUserInfoDao();
-//        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
-//        LOGIN_USER = userInfos.get(0);//读取第一项
-
+        UserInfoDao userInfoDao = DaoMaster.newDevSession(getActivity(), UserInfoDao.TABLENAME).getUserInfoDao();
+        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
+        LOGIN_USER = userInfos.get(0);//读取第一项
         // 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
         long time = System.currentTimeMillis();
         View view = inflater.inflate(getLayoutId(), container, false);

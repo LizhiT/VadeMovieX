@@ -21,9 +21,9 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.lee.vademovies.R;
 import com.lee.vademovies.appllication.VadeApplication;
 import com.lee.vademovies.base.BaseActivity;
-import com.lee.vademovies.bean.Result;
-import com.lee.vademovies.bean.UserInfo;
 import com.lee.vademovies.model.DataCall;
+import com.lee.vademovies.model.bean.Result;
+import com.lee.vademovies.model.bean.UserInfo;
 import com.lee.vademovies.presenter.LoginPresenter;
 import com.lee.vademovies.util.EditTextUtils;
 import com.lee.vademovies.util.EncryptUtil;
@@ -69,7 +69,6 @@ public class LoginActivity extends BaseActivity {
     private Unbinder mUnbinder;
     private SharedPreferences mShare;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +112,6 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
     @Override
     protected void destoryData() {
         mLoginPresenter.unBind();
@@ -148,7 +146,8 @@ public class LoginActivity extends BaseActivity {
                 break;
             //快速注册
             case R.id.tv_fast_resign_login:
-                intent(ResignActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ResignActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             //登录
             case R.id.bt_login_login:
@@ -183,10 +182,9 @@ public class LoginActivity extends BaseActivity {
         public void onSuccess(Result<UserInfo> data, Object... args) {
             mLoadDialog.cancel();
             if (data.getStatus().equals("0000")) {
-                data.getResult().setTtt(1);//设置登录状态，保存到数据库
+                data.getResult().setStatus(1);//设置登录状态，保存到数据库
                 UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
                 userInfoDao.insertOrReplace(data.getResult());
-
                 intent(MainActivity.class);
                 finish();
             }
@@ -202,16 +200,22 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    //TODO 注册的值没有传过来
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("data");
-        String phoneNum = bundle.getString("phoneNum");
-        mEtPhoneLogin.setText(phoneNum);
-        String phonePwd = bundle.getString("phonePwd");
-        mEtPsdLogin.setText(phonePwd);
-        LogUtils.d(phoneNum, phonePwd, "LoginActivity");
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 1) {
+            if (resultCode == 2) { // 对应B里面的标志为成功
+                String phoneNum = data.getStringExtra("phoneNum");
+                mEtPhoneLogin.setText(phoneNum);
+                String phonePwd = data.getStringExtra("phonePwd");
+                mEtPsdLogin.setText(phonePwd);
+                LogUtils.d(phoneNum, phonePwd, "LoginActivity");
+            }
+            LogUtils.d("Code", requestCode, resultCode, data);
+        }
     }
 }

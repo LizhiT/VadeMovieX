@@ -2,7 +2,7 @@ package com.lee.vademovies.util.httputil;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.lee.vademovies.appllication.VadeApplication;
-import com.lee.vademovies.bean.UserInfo;
+import com.lee.vademovies.model.bean.UserInfo;
 import com.lee.vademovies.util.db.DaoMaster;
 import com.lee.vademovies.util.db.UserInfoDao;
 
@@ -31,8 +31,8 @@ public class NetWorkMangager {
     private Retrofit mRetrofit;
     private OkHttpClient mOkHttpClient;
 
-    private NetWorkMangager() {
-        init(false);
+    public NetWorkMangager() {
+        init(true);
     }
 
     public static NetWorkMangager instance() {
@@ -96,15 +96,15 @@ public class NetWorkMangager {
                 if (lo == null) {
                     return null;
                 } else {
-                    if (lo.getTtt() == 1) {
+                    if (lo.getStatus() == 1) {
                         Request request = chain.request();
                         Request.Builder header = request.newBuilder()
-                                .addHeader("userId", String.valueOf(list.get(i).getId()))
+                                .addHeader("userId", String.valueOf(list.get(i).getUserId()))
                                 .addHeader("sessionId", list.get(i).getSessionId());
                         Request build = header.build();
                         Response response = chain.proceed(build);
                         LogUtils.d("intercept: " + list.get(i).getSessionId());
-                        LogUtils.d("intercept: " + String.valueOf(list.get(i).getId()));
+                        LogUtils.d("intercept: " + String.valueOf(list.get(i).getUserId()));
                         return response;
                     }
                 }

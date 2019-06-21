@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lee.vademovies.R;
-import com.lee.vademovies.bean.HotWillBean;
-import com.lee.vademovies.bean.Result;
+import com.lee.vademovies.model.bean.HotWillBean;
+import com.lee.vademovies.model.bean.Result;
 import com.lee.vademovies.util.ImageLoaderManager;
 
 import java.util.List;

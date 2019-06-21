@@ -1,6 +1,7 @@
 package com.lee.vademovies.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +15,8 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lee.vademovies.R;
 import com.lee.vademovies.base.BaseActivity;
-import com.lee.vademovies.bean.Result;
 import com.lee.vademovies.model.DataCall;
+import com.lee.vademovies.model.bean.Result;
 import com.lee.vademovies.presenter.ResignPresenter;
 import com.lee.vademovies.util.EditTextUtils;
 import com.lee.vademovies.util.EncryptUtil;
@@ -132,16 +133,16 @@ public class ResignActivity extends BaseActivity {
                     LogUtils.d(mEtNameResign.getText().toString());
                     return;
                 }
-                if (!mEtSexResign.getText().toString().equals("男") || mEtSexResign.getText().toString().equals("女")) {
-                    ToastUtils.showShort("请输入性别");
-                    LogUtils.d(mEtSexResign.getText().toString());
-                    return;
-                } else {
+                if (mEtSexResign.getText().toString().equals("男") || mEtSexResign.getText().toString().equals("女")) {
                     if (mEtSexResign.getText().toString().equals("男")) {
                         mEtSexResign1 = 1;
                     } else {
                         mEtSexResign1 = 2;
                     }
+                } else {
+                    ToastUtils.showShort("请输入正确的性别");
+                    LogUtils.d(mEtSexResign.getText().toString());
+                    return;
                 }
                 if (!RegexUtils.isMobileExact(mEtPhoneResign.getText().toString())) {
                     ToastUtils.showShort("请输入正确的手机号");
@@ -182,18 +183,17 @@ public class ResignActivity extends BaseActivity {
         public void onSuccess(Result data, Object... args) {
             if (data.getStatus().equals("0000")) {
                 ToastUtils.showShort(data.getMessage());
-                finish();
-                Bundle bundle = new Bundle();
+                Intent intent = new Intent();
                 String phoneNum = mEtPhoneResign.getText().toString();
                 String phonePwd = mEtPwdResign.getText().toString();
-                bundle.putString("phoneNum", phoneNum);
-                bundle.putString("phonePwd", phonePwd);
+                intent.putExtra("phoneNum", phoneNum);
+                intent.putExtra("phonePwd", phonePwd);
                 LogUtils.d(phoneNum, phonePwd, "ResignActivity");
-                intent(LoginActivity.class, bundle);
-                finish();
+                ResignActivity.this.setResult(2, intent);
             } else {
-                ToastUtils.showShort(data.getMessage(), data.getStatus());
+                ToastUtils.showShort(data.getMessage());
             }
+            finish();
         }
 
         @Override

@@ -1,4 +1,4 @@
-package com.lee.vademovies.bean;
+package com.lee.vademovies.model.bean;
 
 import java.util.List;
 

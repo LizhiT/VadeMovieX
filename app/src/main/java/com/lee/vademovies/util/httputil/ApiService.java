@@ -1,12 +1,12 @@
 package com.lee.vademovies.util.httputil;
 
-import com.lee.vademovies.bean.HotBean;
-import com.lee.vademovies.bean.HotWillBean;
-import com.lee.vademovies.bean.HotingBean;
-import com.lee.vademovies.bean.LoginBean;
-import com.lee.vademovies.bean.MovieDetail;
-import com.lee.vademovies.bean.Result;
-import com.lee.vademovies.bean.UserInfo;
+import com.lee.vademovies.model.bean.HotBean;
+import com.lee.vademovies.model.bean.HotWillBean;
+import com.lee.vademovies.model.bean.HotingBean;
+import com.lee.vademovies.model.bean.LoginBean;
+import com.lee.vademovies.model.bean.MovieDetail;
+import com.lee.vademovies.model.bean.Result;
+import com.lee.vademovies.model.bean.UserInfo;
 
 import java.util.List;
 
@@ -14,7 +14,6 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -48,8 +47,7 @@ public interface ApiService {
 
     //查询会员首页信息
     @GET("user/v1/verify/findUserHomeInfo")
-    Observable<Result<LoginBean.ResultBean.UserInfoBean>> queryHome(@Header("userId") int userId,
-                                                                    @Header("sessionId") String sessionId);
+    Observable<Result<LoginBean.ResultBean.UserInfoBean>> queryHome();
 
     //查询热门电影信息
     @GET("movie/v1/findHotMovieList")

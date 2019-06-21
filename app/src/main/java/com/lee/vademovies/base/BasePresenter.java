@@ -1,6 +1,6 @@
 package com.lee.vademovies.base;
 
-import com.lee.vademovies.bean.Result;
+import com.lee.vademovies.model.bean.Result;
 import com.lee.vademovies.model.DataCall;
 import com.lee.vademovies.util.exception.CustomException;
 import com.lee.vademovies.util.exception.ResponseTransformer;

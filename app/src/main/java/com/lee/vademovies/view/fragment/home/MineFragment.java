@@ -13,12 +13,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lee.vademovies.R;
+import com.lee.vademovies.appllication.VadeApplication;
 import com.lee.vademovies.base.BaseFragment;
-import com.lee.vademovies.view.activity.mine.AttentionActivity;
-import com.lee.vademovies.view.activity.mine.FeedBackActivity;
+import com.lee.vademovies.model.DataCall;
+import com.lee.vademovies.model.bean.LoginBean;
+import com.lee.vademovies.model.bean.Result;
+import com.lee.vademovies.presenter.MinePresenter;
+import com.lee.vademovies.util.exception.ApiException;
 import com.lee.vademovies.view.activity.LoginActivity;
 import com.lee.vademovies.view.activity.MessageActivity;
+import com.lee.vademovies.view.activity.mine.AttentionActivity;
+import com.lee.vademovies.view.activity.mine.FeedBackActivity;
 import com.lee.vademovies.view.activity.mine.TicketHistoryActivity;
 import com.lee.vademovies.view.activity.mine.UserInfoActivity;
 
@@ -30,7 +38,7 @@ import butterknife.Unbinder;
 /**
  * Created :  LiZhIX
  * Date :  2019/6/14 16:27
- * Description  :  主页Fragment
+ * Description  :  我的主页Fragment
  */
 public class MineFragment extends BaseFragment {
 
@@ -57,6 +65,7 @@ public class MineFragment extends BaseFragment {
     RelativeLayout mRlExitMine;
     private View view;
     private Unbinder unbinder;
+    private MinePresenter mMinePresenter;
 
     @Nullable
     @Override
@@ -71,6 +80,7 @@ public class MineFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        mMinePresenter = null;
     }
 
     @Override
@@ -80,7 +90,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        mMinePresenter = new MinePresenter(new MineDataCall());
+        mMinePresenter.reqeust();
     }
 
 
@@ -140,13 +151,30 @@ public class MineFragment extends BaseFragment {
                 builder.setPositiveButton("确认退出", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         getActivity().finish();
                     }
                 });
                 builder.setNegativeButton("暂不退出", null);
                 builder.show();
+                VadeApplication.getShare().edit().clear().commit();
                 break;
+        }
+    }
+
+
+    class MineDataCall implements DataCall<Result<LoginBean.ResultBean.UserInfoBean>> {
+
+        @Override
+        public void onSuccess(Result<LoginBean.ResultBean.UserInfoBean> data, Object... args) {
+            LogUtils.d(data.getMessage());
+        }
+
+        @Override
+        public void onFail(ApiException data, Object... args) {
+            ToastUtils.showShort(data.getDisplayMessage());
+
         }
     }
 

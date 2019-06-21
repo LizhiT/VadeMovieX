@@ -6,8 +6,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.lee.vademovies.R;
 import com.lee.vademovies.base.BaseActivity;
+import com.lee.vademovies.model.DataCall;
+import com.lee.vademovies.model.bean.LoginBean;
+import com.lee.vademovies.model.bean.Result;
+import com.lee.vademovies.presenter.UserInfoPresenter;
+import com.lee.vademovies.util.exception.ApiException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +51,7 @@ public class UserInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUnbinder = ButterKnife.bind(this);
+
     }
 
     @Override
@@ -54,7 +61,8 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        UserInfoPresenter userInfoPresenter = new UserInfoPresenter(new UserInfoDataCall());
+        userInfoPresenter.reqeust();
     }
 
     @Override
@@ -81,6 +89,21 @@ public class UserInfoActivity extends BaseActivity {
             case R.id.rl_reset_mine_info:
                 intent(ResetInfoActivity.class);
                 break;
+        }
+    }
+
+    class UserInfoDataCall implements DataCall<Result<LoginBean.ResultBean.UserInfoBean>> {
+
+        @Override
+        public void onSuccess(Result<LoginBean.ResultBean.UserInfoBean> data, Object... args) {
+            if (data.getStatus().equals("0000")) {
+                LogUtils.d(data.getMessage());
+            }
+        }
+
+        @Override
+        public void onFail(ApiException data, Object... args) {
+            LogUtils.d(data.getDisplayMessage());
         }
     }
 }
